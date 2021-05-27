@@ -62,7 +62,15 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-
+      - name: luci-app-vssr
+        run: |
+          cd package/
+          mkdir openwrt-packages
+          cd openwrt-packages
+          # git lua-maxminddb 依赖
+          git clone https://github.com/jerrykuku/lua-maxminddb.git
+          git clone https://github.com/jerrykuku/luci-app-vssr.git
+ 
       - name: Generate configuration file
         run: |
           rm -f ./.config*
@@ -77,7 +85,21 @@ jobs:
           CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
           CONFIG_KERNEL_BUILD_DOMAIN="Azure"
           EOF
-
+          cat >> .config <<EOF
+          CONFIG_PACKAGE_luci-app-frpc=y
+          CONFIG_PACKAGE_frp=y
+          CONFIG_PACKAGE_lua-maxminddb=y
+          CONFIG_PACKAGE_luci-app-vssr=y
+          CONFIG_PACKAGE_luci-theme-argon=y
+          CONFIG_PACKAGE_luci-theme-netgear=y
+          CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_haproxy=y
+          CONFIG_PACKAGE_ip6tables=y
+          CONFIG_PACKAGE_ip6tables-extra=y
+          CONFIG_PACKAGE_ip6tables-mod-nat=y
+          CONFIG_PACKAGE_iptables-mod-extra=y
+          CONFIG_PACKAGE_ipv6helper=y
+          EOF
           #
           # ===============================================================
           # 
