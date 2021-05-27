@@ -64,9 +64,7 @@ jobs:
           ./scripts/feeds install -a
       - name: luci-app-vssr
         run: |
-          cd package/
-          mkdir openwrt-packages
-          cd openwrt-packages
+          cd package/lean/
           # git lua-maxminddb 依赖
           git clone https://github.com/jerrykuku/lua-maxminddb.git
           git clone https://github.com/jerrykuku/luci-app-vssr.git
