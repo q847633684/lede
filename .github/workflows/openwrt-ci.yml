@@ -91,6 +91,7 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_lua-maxminddb=y
           CONFIG_PACKAGE_luci-app-vssr=y
+          CONFIG_PACKAGE_luci-app-softethervpn=y
           EOF
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-theme-argon=y
